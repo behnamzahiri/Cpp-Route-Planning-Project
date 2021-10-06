@@ -1,0 +1,46 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/behnamzahiri/Dropbox/++ UDACITY/C++/Project 1/Cpp-Route-Planning-Project/src/model.h
+vector
+-
+unordered_map
+-
+string
+-
+cstddef
+-
+
+/Users/behnamzahiri/Dropbox/++ UDACITY/C++/Project 1/Cpp-Route-Planning-Project/src/route_model.h
+limits
+-
+cmath
+-
+unordered_map
+-
+model.h
+/Users/behnamzahiri/Dropbox/++ UDACITY/C++/Project 1/Cpp-Route-Planning-Project/src/model.h
+iostream
+-
+
+/Users/behnamzahiri/Dropbox/++ UDACITY/C++/Project 1/Cpp-Route-Planning-Project/src/route_planner.cpp
+route_planner.h
+/Users/behnamzahiri/Dropbox/++ UDACITY/C++/Project 1/Cpp-Route-Planning-Project/src/route_planner.h
+algorithm
+-
+
+/Users/behnamzahiri/Dropbox/++ UDACITY/C++/Project 1/Cpp-Route-Planning-Project/src/route_planner.h
+iostream
+-
+vector
+-
+string
+-
+route_model.h
+/Users/behnamzahiri/Dropbox/++ UDACITY/C++/Project 1/Cpp-Route-Planning-Project/src/route_model.h
+
