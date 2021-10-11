@@ -11,14 +11,14 @@
 using namespace std::experimental;
 
 static std::optional<std::vector<std::byte>> ReadFile(const std::string &path)
-{   
+{
     std::ifstream is{path, std::ios::binary | std::ios::ate};
     if( !is )
         return std::nullopt;
-    
+
     auto size = is.tellg();
-    std::vector<std::byte> contents(size);    
-    
+    std::vector<std::byte> contents(size);
+
     is.seekg(0);
     is.read((char*)contents.data(), size);
 
@@ -27,8 +27,23 @@ static std::optional<std::vector<std::byte>> ReadFile(const std::string &path)
     return std::move(contents);
 }
 
+
+std::pair<float, float> input(){
+    float x, y;
+    std::cout << "\tx and y should be in (0, 100) range:\n";
+    std::cin >> x >> y;
+    while (x < 0 or x > 100 or y < 0 or y > 100){
+        std::cout << "\tx and y should be in (0, 100) range. Please enter x and y again (separated by space):\n";
+        std::cin >> x >> y;
+    }
+
+    return {x, y};
+
+}
+
+
 int main(int argc, const char **argv)
-{    
+{
     std::string osm_data_file = "";
     if( argc > 1 ) {
         for( int i = 1; i < argc; ++i )
@@ -40,9 +55,9 @@ int main(int argc, const char **argv)
         std::cout << "Usage: [executable] [-f filename.osm]" << std::endl;
         osm_data_file = "../map.osm";
     }
-    
+
     std::vector<std::byte> osm_data;
- 
+
     if( osm_data.empty() && !osm_data_file.empty() ) {
         std::cout << "Reading OpenStreetMap data from the following file: " <<  osm_data_file << std::endl;
         auto data = ReadFile(osm_data_file);
@@ -51,16 +66,20 @@ int main(int argc, const char **argv)
         else
             osm_data = std::move(*data);
     }
-    
+
     // TODO 1: Declare floats `start_x`, `start_y`, `end_x`, and `end_y` and get
     // user input for these values using std::cin. Pass the user input to the
     // RoutePlanner object below in place of 10, 10, 90, 90.
     float start_x = 10.0, start_y = 10.0, end_x = 10.0, end_y = 10.0;
-    std::cout << "Enter start coordinates (x and y separated by comma):\n";
-    std::cin >> start_x >> start_y;
+    std::cout << "Enter start coordinates (x and y separated by space):\n";
+    std::pair<float, float> start_input = input();
+    start_x = start_input.first;
+    start_y = start_input.second;
 
-    std::cout << "Enter end coordinates (x and y separated by comma):\n";
-    std::cin >> end_x >> end_y;
+    std::cout << "Enter end coordinates (x and y separated by space):\n";
+    std::pair<float, float> end_input = input();
+    end_x = end_input.first;
+    end_y = end_input.second;
 
     // Build Model.
     RouteModel model{osm_data};
